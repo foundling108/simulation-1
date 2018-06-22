@@ -1,18 +1,41 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import axios from 'axios';
+
 import './App.css';
+import Header from './component/Header/Header';
+import Dashboard from './component/Dashboard/Dashboard';
+import Form from './component/Form/Form';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      inventory: []
+    }
+    this.getIventory = this.getIventory.bind(this);
+  }
+
+  componentDidMount() {
+    this.getIventory();
+    //mount the invoked () method.
+  }
+
+  getIventory() {
+    axios.get('/api/inventory')
+    .then( res => this.setState({ inventory: res.data }))
+    //data is the . from the iventory. must have a didMount.
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+          
+            <Header/>
+
+              <Form getIventory={this.getIventory}/>
+              
+              <Dashboard inventory={this.state.inventory}/>
+            
       </div>
     );
   }
