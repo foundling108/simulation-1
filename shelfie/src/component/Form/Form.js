@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 //import axios from 'axios';
+import './Form.css';
 
 class Form extends Component {
     constructor(props) {
@@ -46,7 +47,7 @@ class Form extends Component {
 
     render() {
         return(
-            <div>
+            <div className="form">
                         
                    <p>Image URL:</p>
                    {/* Can be converted to url type in a setState */}
